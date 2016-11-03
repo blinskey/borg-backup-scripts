@@ -68,7 +68,7 @@ export BORG_PASSPHRASE=MySecretPassphrase
 # setup, which avoids inefficiencies that can occur when backing up multiple
 # machines to a single repository. For details, see
 # https://borgbackup.readthedocs.io/en/stable/faq.html#can-i-backup-from-multiple-servers-into-a-single-repository
-readonly USER=username
+readonly USER=login
 readonly HOST=example.com
 readonly REPO="$(hostname)" # Path to repository on the host
 readonly TARGET="${USER}@${HOST}:${REPO}"
@@ -80,15 +80,14 @@ readonly ENCRYPTION_METHOD=keyfile
 readonly COMPRESSION_ALGO=zlib
 readonly COMPRESSION_LEVEL=6
 
-# List of paths to back up.
-readonly SOURCE_PATHS="${HOME}/Documents
-                       ${HOME}/Music
-                       ${HOME}/Videos
-                       ${HOME}/Pictures
-                       ${HOME}/Public
-                       ${HOME}/src
-                       ${HOME}/bin
-                       ${HOME}/.mail"
+# Define home directory explicitly, since this script will be run by root.
+readonly MY_HOME=/home/username
+
+# Whitespace-separated list of paths to back up.
+readonly SOURCE_PATHS="${HOME}/Documents ${HOME}/Music ${HOME}/Pictures"
+
+# Whitespace-separated list of paths to exclude from backup.
+readonly EXCLUDE="${MY_HOME}/path/to/backup.sh"
 
 # Number of days, weeks, &c. of backups to keep when pruning.
 readonly KEEP_DAILY=7
@@ -109,7 +108,7 @@ main() {
 
 # $1...: command line arguments
 parse_args() {
-    while getopts ":ichpdq" opt; do
+    while getopts ":ichpdqlv" opt; do
         case $opt in
             i)  init
                 exit 0
@@ -132,6 +131,9 @@ parse_args() {
             v)  check
                 exit 0
                 ;;
+            l)  list
+                exit 0
+                ;;
             :)  printf "Missing argument for option %s\n" "$OPTARG" >&2
                 usage
                 exit 1
@@ -146,12 +148,13 @@ parse_args() {
 
 usage() {
     printf "Usage: %s OPTION\n" "$(basename "$0")"
-    printf "  %s\t%s\n" "-c" "create a new backup"
+    printf "  %s\t%s\n" "-c" "create new archive"
     printf "  %s\t%s\n" "-d" "delete repository"
     printf "  %s\t%s\n" "-h" "print this help text and exit"
-    printf "  %s\t%s\n" "-i" "initialize a new repository"
-    printf "  %s\t%s\n" "-p" "prune backups"
-    printf "  %s\t%s\n" "-q" "check remote storage quota usage"
+    printf "  %s\t%s\n" "-i" "initialize new repository"
+    printf "  %s\t%s\n" "-l" "list contents of repository"
+    printf "  %s\t%s\n" "-p" "prune archive"
+    printf "  %s\t%s\n" "-q" "check remote quota usage"
     printf "  %s\t%s\n" "-v" "verify repository consistency"
 }
 
@@ -170,6 +173,7 @@ create() {
     # We want $SOURCE_PATHS to undergo word splitting here.
     borg create --remote-path=borg1 \
         --compression "${COMPRESSION_ALGO},${COMPRESSION_LEVEL}" \
+        --exclude "$EXCLUDE" \
         "${TARGET}::{now:%Y%m%d}" $SOURCE_PATHS
 
     logger -p user.info "Finished Borg archive creation: ${TARGET}"
@@ -207,6 +211,10 @@ quota() {
 
 check() {
     borg check --remote-path=borg1 "${TARGET}"
+}
+
+list() {
+    borg list --remote-path=borg1 "${TARGET}"
 }
 
 on_failure() {
