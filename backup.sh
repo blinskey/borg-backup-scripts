@@ -83,13 +83,14 @@ readonly COMPRESSION_ALGO=zlib
 readonly COMPRESSION_LEVEL=6
 
 # Define home directory explicitly, since this script will be run by root.
-readonly MY_HOME=/home/username
+# (We could also define $HOME in our anacrontab instead.)
+readonly HOME=/home/username
 
 # Whitespace-separated list of paths to back up.
 readonly SOURCE_PATHS="${HOME}/Documents ${HOME}/Music ${HOME}/Pictures"
 
 # Whitespace-separated list of paths to exclude from backup.
-readonly EXCLUDE="${MY_HOME}/path/to/backup.sh"
+readonly EXCLUDE="${HOME}/path/to/backup.sh"
 
 # Number of days, weeks, &c. of backups to keep when pruning.
 readonly KEEP_DAILY=7
