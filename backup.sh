@@ -199,7 +199,7 @@ delete() {
 
     # shellcheck disable=SC2029
     # We want the repository name to expand on the client side.
-    ssh "${TARGET}" rm -rf "${REPO}"
+    ssh "${USER}@${HOST}" rm -rf "${REPO}"
 
     logger -p user.info "Deleted Borg repository: ${TARGET}"
 }
