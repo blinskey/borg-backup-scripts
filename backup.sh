@@ -1,56 +1,12 @@
 #!/bin/bash
 #
-###############################################################################
-#
-# Copyright (c) 2016 Benjamin Linskey
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-#
-###############################################################################
-#
-# THIS SCRIPT HAS NOT BEEN FULLY TESTED. USE AT YOUR OWN RISK.
-#
 # This is a simple wrapper script for the BorgBackup program. It is primarily
 # intended for use in cron or anacron jobs but also provides some functions
 # that can simplify interactive maintenance of a Borg repository.
 #
 # The commands in this script assume a compressed, encrypted, remote
 # repository, but the script can be modified for other use cases with minimal
-# changes.  Set up public key SSH authentication in order to allow
-# non-interactive access to your server.  The script exports BORG_PASSPHRASE so
-# that encrypted repositories can be modified by cron jobs. Accordingly, this
-# file's ownership and permissions should be restricted to prevent exposure of
-# the password. You should keep a separate, secure copy of all files and
-# passphrases necessary to access your data; see the Borg documentation for
-# details.
-#
-# The "remote-path=borg1" option is intended for use of Borg 1.x with rsync.net
-# and should be removed or modified as necessary for your situation.
-#
-# Borg output is set at the default level ("warning") and is output to
-# stdout and stderr. In addition, the script logs basic information to the
-# system log.
-#
-# Borg resources:
-#
-# - Source code: https://github.com/borgbackup/borg
-# - Documentation: https://borgbackup.readthedocs.io/en/stable/
+# changes.  See the readme for details.
 
 set -o errexit
 set -o nounset
