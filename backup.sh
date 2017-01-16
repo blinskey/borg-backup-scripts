@@ -59,6 +59,8 @@ set -o pipefail
 # Source the repository passphrase from a separate file. That file's ownership
 # and permissions should be set to root:root and 600 to prevent exposure of the
 # passphrase.
+#
+# shellcheck disable=SC1091
 source my-passphrase-export-file.sh
 
 # These variables define the path to the Borg repository on the backup machine.
