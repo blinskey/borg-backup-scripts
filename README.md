@@ -8,7 +8,7 @@ a look at the project's [documentation][Borg docs].
 
 These scripts are not a substitute for a proper understanding of Borg and good
 backup practices. You should familiarize yourself with Borg and the contents of
-the scripts before using them to perform backups. They have not been
+the scripts before using them to perform backups. These scripts have not been
 extensively tested; use at your own risk.
 
 ## Prerequisites
