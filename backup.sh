@@ -56,10 +56,10 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-# Repository passphrase, required for all encrypted repositories.
-# The permissions of this file should be restricted to prevent accidental
-# exposure of this passphrase.
-export BORG_PASSPHRASE=MySecretPassphrase
+# Source the repository passphrase from a separate file. That file's ownership
+# and permissions should be set to root:root and 600 to prevent exposure of the
+# passphrase.
+source my-passphrase-export-file.sh
 
 # These variables define the path to the Borg repository on the backup machine.
 # They can be modified to support local backups if necessary.
