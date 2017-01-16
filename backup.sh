@@ -61,7 +61,7 @@ set -o pipefail
 # passphrase.
 #
 # shellcheck disable=SC1091
-source my-passphrase-export-file.sh
+source borg-passphrase.sh
 
 # These variables define the path to the Borg repository on the backup machine.
 # They can be modified to support local backups if necessary.
