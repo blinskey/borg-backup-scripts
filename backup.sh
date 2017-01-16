@@ -46,7 +46,7 @@ readonly HOME=/home/username
 readonly SOURCE_PATHS="${HOME}/Documents ${HOME}/Music ${HOME}/Pictures"
 
 # Whitespace-separated list of paths to exclude from backup.
-readonly EXCLUDE="${HOME}/path/to/backup.sh"
+readonly EXCLUDE=""
 
 # Number of days, weeks, &c. of backups to keep when pruning.
 readonly KEEP_DAILY=7
