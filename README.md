@@ -36,8 +36,8 @@ operations:
 The script contains a number of variables that can be used to set the backup
 parameters. At the very least, you'll want to modify `USER` and `HOST` to
 specify your login and the address of the remote machine, `HOME` to set your
-home directory, and `SOURCE_PATHS` to specify the files to back up. The other
-available options are documented in the script.
+home directory, and `SOURCE_PATHS` and `EXCLUDE` to specify the files to back
+up. The other available options are documented in the script.
 
 If you'll be encrypting your backups, you'll also need to create a passphrase
 and define it in `borg-passphrase.sh`, which is sourced by `backup.sh`. To
@@ -75,6 +75,8 @@ You'll probably want to  manually run `backup.sh -v` from time to time to check
 the state of the repository, and you should also occasionally perform a backup
 restoration to ensure that everything is working properly. (This script does
 not cover backup restoration.)
+
+Be sure to make a secure local copy of your passphrase and repository key.
 
 [Borg]: https://github.com/borgbackup/borg
 [install Borg]: http://borgbackup.readthedocs.io/en/stable/installation.html
