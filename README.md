@@ -69,7 +69,7 @@ like this:
 
     1   5   remote-backup   /home/username/bin/run-backup.sh
 
-## Good Practices
+## Recommendations
 
 You'll probably want to  manually run `backup.sh -v` from time to time to check
 the state of the repository, and you should also occasionally perform a backup
