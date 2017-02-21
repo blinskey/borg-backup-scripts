@@ -143,7 +143,8 @@ prune() {
 
     borg prune --remote-path=borg1 \
         --keep-daily="${KEEP_DAILY}" --keep-weekly="${KEEP_WEEKLY}" \
-        --keep-monthly="${KEEP_MONTHLY}" --keep-yearly="${KEEP_YEARLY}"
+        --keep-monthly="${KEEP_MONTHLY}" --keep-yearly="${KEEP_YEARLY}" \
+        "$TARGET"
 
     logger -p user.info "Finished Borg prune: ${TARGET}"
 }
