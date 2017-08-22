@@ -1,5 +1,8 @@
 # Borg Backup Scripts
 
+**I no longer use or maintain this repository.** You may want to take a look at
+[Borgmatic][], which is a more mature tool with similar functionality.
+
 This repository contains a handful of scripts that can be used to enable fully
 automated encrypted remote backups with [Borg][].
 
@@ -81,3 +84,4 @@ Be sure to make a secure local copy of your passphrase and repository key.
 [Borg]: https://github.com/borgbackup/borg
 [install Borg]: http://borgbackup.readthedocs.io/en/stable/installation.html
 [Borg docs]: https://borgbackup.readthedocs.io/en/stable/
+[Borgmatic]: https://github.com/witten/borgmatic
